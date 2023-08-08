@@ -45,7 +45,7 @@ func (s *GracefulServer) HandleFunc() {
 	}
 
 	webFilesFs, _ := fs.Sub(webFiles, "public")
-	s.serveMux.Handle("/", http.FileServer(http.FS(webFilesFs)))
+	s.serveMux.Handle("./tts", http.FileServer(http.FS(webFilesFs)))
 	s.serveMux.Handle("/api/legado", http.TimeoutHandler(http.HandlerFunc(s.legadoAPIHandler), 15*time.Second, "timeout"))
 
 	s.serveMux.Handle("/api/azure", http.TimeoutHandler(http.HandlerFunc(s.azureAPIHandler), 30*time.Second, "timeout"))
